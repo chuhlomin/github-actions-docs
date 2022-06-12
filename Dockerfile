@@ -24,7 +24,6 @@ LABEL com.github.actions.description="A Github action for generating docs for Gi
 LABEL com.github.actions.icon="file-text"
 LABEL com.github.actions.color="gray-dark"
 
-COPY --from=build-env /go/src/app/template.md /template.md
 COPY --from=build-env /go/bin/app /app
 
 CMD ["/app"]

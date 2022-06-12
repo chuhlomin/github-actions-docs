@@ -25,3 +25,6 @@ outputs:
 runs:
   using: docker
   image: 'docker://chuhlomin/github-actions-docs:v0.0.1'
+  env:
+    INPUT_WORKING_DIR: ${{ inputs.working-dir }}
+    INPUT_OUTPUT_FILE: ${{ inputs.output-file }}

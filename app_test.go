@@ -8,7 +8,7 @@ import (
 )
 
 func TestProcessDir(t *testing.T) {
-	app, err := newApp("template.md")
+	app, err := newApp(tmplContent)
 	assert.NoError(t, err, "newApp should not return error")
 
 	dir := "testdata/action"

@@ -1,12 +1,16 @@
 package main
 
 import (
+	_ "embed"
 	"fmt"
 	"log"
 
 	"github.com/caarlos0/env/v6"
 	"github.com/pkg/errors"
 )
+
+//go:embed template.md
+var tmplContent string
 
 type config struct {
 	WorkingDir []string `env:"INPUT_WORKING_DIR" envDefault:"." envSeparator:","`
@@ -30,7 +34,7 @@ func run() error {
 		return errors.Wrap(err, "failed to parse environment variables")
 	}
 
-	app, err := newApp("template.md")
+	app, err := newApp(tmplContent)
 	if err != nil {
 		return errors.Wrap(err, "failed to create app")
 	}
@@ -44,12 +48,12 @@ func run() error {
 		numChanged++
 	}
 
+	fmt.Printf("::set-output name=num-changed::%d", numChanged)
+
 	if numChanged == 0 {
 		log.Println("No changes detected.")
 		return nil
 	}
-
-	fmt.Printf("::set-output name=num-changed::%d", numChanged)
 
 	return nil
 }

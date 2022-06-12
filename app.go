@@ -7,7 +7,6 @@ import (
 	"os"
 	"text/template"
 
-	"github.com/pkg/errors"
 	"gopkg.in/yaml.v3"
 )
 
@@ -19,14 +18,8 @@ type app struct {
 	tmpl *template.Template
 }
 
-func newApp(templatePath string) (*app, error) {
-	// read template file
-	tmplContent, err := ioutil.ReadFile(templatePath)
-	if err != nil {
-		return nil, errors.Wrap(err, "failed to read template file")
-	}
-
-	tmpl := template.Must(template.New("readme").Funcs(fm).Parse(string(tmplContent)))
+func newApp(tmplContent string) (*app, error) {
+	tmpl := template.Must(template.New("readme").Funcs(fm).Parse(tmplContent))
 	return &app{tmpl: tmpl}, nil
 }
 
