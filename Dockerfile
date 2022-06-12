@@ -4,7 +4,10 @@ WORKDIR /go/src/app
 ADD . /go/src/app
 
 RUN go get -d -v ./...
-RUN go build -o /go/bin/app
+RUN go test ./...
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
+    go build -mod=readonly -a -installsuffix cgo \
+    -o /go/bin/app .
 
 
 FROM gcr.io/distroless/static:966f4bd97f611354c4ad829f1ed298df9386c2ec
