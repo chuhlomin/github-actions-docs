@@ -1,0 +1,27 @@
+name: github-actions-docs
+description: A Github action for generating docs for GitHub actions using Go template.
+
+author: Konstantin Chukhlomin <mail@chuhlomin.com>
+
+branding:
+  icon: 'file-text'
+  color: 'gray-dark'
+
+inputs:
+  working-dir:
+    description: Comma separated list of directories to generate docs for
+    required: false
+    default: '.'
+
+  output-file:
+    description: File in module directory where the docs should be placed
+    required: false
+    default: 'README.md'
+
+outputs:
+  num-changed:
+    description: Number of files changed
+
+runs:
+  using: docker
+  image: 'docker://chuhlomin/github-actions-docs:v0.0.1'

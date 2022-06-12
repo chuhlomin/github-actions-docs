@@ -1,0 +1,21 @@
+name: some action
+description: some action
+
+author: noone
+
+inputs:
+  input1:
+    description: input1
+    required: true
+
+  input2:
+    description: input2
+    required: false
+
+outputs:
+  output1:
+    description: output1
+
+runs:
+  using: docker
+  image: 'docker://username/image:v0.0'
